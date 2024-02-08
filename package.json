@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "babel-plugin-react-css-modules": "^5.2.6",
     "class-variance-authority": "^0.7.0",
+    "file-saver": "^2.0.5",
     "lucide-react": "^0.323.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
