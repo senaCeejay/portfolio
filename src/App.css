@@ -102,11 +102,12 @@
     align-items: center;
 }
 
-@media (max-width:768px) {
+
+@media (min-width:768px) and (max-width:1023px) {
     .hero-section {
         display: flex;
         flex-direction: column-reverse;
-        margin-top: -30px;
+        margin-top: 80px;
     }
 
     .hero-section img {
@@ -115,12 +116,24 @@
         /* margin-bottom: 100px; */
     }
 
+    .modal-content {
+        width: 550px;
+        height: 600px;
+    }
+
+    .modal-img img {
+        width: 100%;
+        max-height: 300px;
+        object-fit: cover;
+
+    }
 }
 
-@media (max-width:666px) {
+@media (max-width:667px) {
     .hero-section {
         display: flex;
         flex-direction: column-reverse;
+        margin-top: -30px;
     }
 
     .section {
@@ -133,6 +146,10 @@
         margin-top: 100px;
     }
 
+    .modal-content {
+        width: 550px;
+        height: 320px;
+    }
 
 }
 
@@ -144,6 +161,33 @@
         min-height: 1000px;
     }
 
+    .modal-content {
+        width: 700px;
+        height: 700px;
+    }
+
+    .modal-img img {
+        max-height: 350px;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+@media (max-width:375px) {
+    .hero-section {
+        margin-top: -30px;
+    }
+
+    .modal-content {
+        width: 350px;
+        height: 600px;
+    }
+
+    .modal-img img {
+        max-height: 200px;
+        width: 100%;
+        object-fit: cover;
+    }
 }
 
 .navbar {
@@ -168,4 +212,91 @@
     opacity: 1;
     padding-right: 0px;
     transition: opacity 1.5s ease-in-out;
+}
+
+.line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+.project-cards>div:nth-child(1) {
+    --animate-duration: .8s;
+
+}
+
+.project-cards>div:nth-child(2) {
+    --animate-duration: 1s;
+
+}
+
+.project-cards>div:nth-child(3) {
+    --animate-duration: 1.2s;
+
+}
+
+.project-cards>div:nth-child(4) {
+    --animate-duration: 1.4s;
+
+}
+
+.project-cards>div:nth-child(5) {
+    --animate-duration: .8s;
+
+}
+
+.project-cards>div:nth-child(6) {
+    --animate-duration: 1s;
+
+
+}
+
+.project-cards>div:nth-child(7) {
+    --animate-duration: 1.2s;
+
+
+}
+
+.project-cards>div:nth-child(8) {
+    --animate-duration: 1.4s;
+
+}
+
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    overflow: scroll;
+
+}
+
+
+.modal-open {
+    overflow: hidden;
+}
+    
+.modal-img img {
+    height: 500px;
+    object-fit: cover;
 }

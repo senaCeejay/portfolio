@@ -1,5 +1,5 @@
 import { cva } from 'class-variance-authority';
-import React, { Children } from 'react';
+import React from 'react';
 import { twMerge } from 'tailwind-merge';
 // const variants = { default: "bg-secondary hover:bg-secondary-hover transition-colors", ghost: "hover:bg-gray-100 transition-colors" }
 // const sizes = { default: "rounded p-2  transition-colors", icon: " rounded-full w-10 h-10 flex items-center justify-center p-2.5  transition-colors" }
@@ -9,9 +9,11 @@ const buttonStyles = cva(["transition-colors"], {
         variant: {
             default: ["bg-secondary", "hover:bg-secondary-hover"],
             ghost: ["hover:bg-gray-100"],
-            dark: ["bg-sky-400", "hover:bg-sky-500", "text-white"]
+            dark: ["bg-sky-400", "hover:bg-sky-500", "text-white"],
+            light: ["bg-white", "text-sky-400", "border-sky-400", "border", "hover:text-sky-500", "hover:border-sky-500"]
         },
         size: {
+            normal: ["rounded p-2"],
             default: ["rounded p-2 w-36"],
             icon: ["rounded-full w-10 h-10 flex items-center justify-center p-2.5"],
         }

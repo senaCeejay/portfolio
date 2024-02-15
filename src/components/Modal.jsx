@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Modal = (props) => {
-    const modalstyle = " h-screen mt-2 flex flex-col items-center bg-white fixed"
+    const [nav, setNav] = useState(true);
+
+    const handleClick = () => {
+        setNav(false);
+        if (props.onClick) {
+            props.onClick();
+        }
+    };
 
     return (
         <>
-            <div className={props.activeNav ? `${modalstyle} w-screen` : modalstyle}>
+            <div className="w-screen md:w-0 h-screen mt-2 flex flex-col items-center bg-white fixed">
                 <div className='mt-4 flex flex-col gap-6'>
-                    {/* <p className={props.activeNav ? "fade-in-text show" : "fade-in-text"}>asd</p> */}
-                    <p className="font-bold">Home</p>
-                    <p className="font-bold">About</p>
-                    <p className="font-bold">Project</p>
-                    <p className="font-bold">Contact</p>
+                    <a href="#home" className="font-bold" onClick={handleClick}>Home</a>
+                    <a href="#about" className="font-bold" onClick={handleClick}>About</a>
+                    <a href="#project" className="font-bold" onClick={handleClick}>Project</a>
+                    <a href="#contact" className="font-bold" onClick={handleClick}>Contact</a>
                 </div>
-            </div >
+            </div>
         </>
     )
 }
 
-export default Modal
+export default Modal;

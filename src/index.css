@@ -7,13 +7,19 @@
 * {
     box-sizing: border-box;
     /* color: #fff; */
-    /* font-family: "Poppins", sans-serif; */
+    font-family: "Poppins", sans-serif;
 }
 
 body,
 html {
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+    display: none;
 }
 
 .container {
@@ -24,4 +30,17 @@ html {
 .section {
     /* height: 100vh; */
     min-height: 1000px;
+    scroll-margin-top: 65px;
+}
+
+.duration1 {
+    --animate-duration: 0.8s;
+}
+
+.duration2 {
+    --animate-duration: 1s;
+}
+
+.duration3 {
+    --animate-duration: 1.2s;
 }

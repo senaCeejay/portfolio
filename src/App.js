@@ -4,15 +4,19 @@ import { Link } from "react-scroll";
 import * as LR from "lucide-react"
 import HeroSection from './components/HeroSection';
 import About from './components/About';
-import MyWork from './components/Projects';
 import Contact from './components/Contact';
 import Button from './components/Button';
 import Modal from './components/Modal';
+import DetailsModal from './components/DetailsModal'
+import Projects from './components/Projects';
+import ScrollToTheTop from './components/ScrollToTheTop';
+import { ProjectDataList } from '../src/data/projectData';
+
 function App() {
 
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-
+    const [projects, setProjects] = useState([]);
     // const [darkmode, setDarkmode] = useState(false)\
     const darkmode = ""
     const mystyle = {
@@ -21,7 +25,6 @@ function App() {
         fontWeight: "font-weight: 700",
         borderBottom: "2px solid #7dd3fc",
     };
-    const linkstyle = 'cursor-pointer p-1 font-semibold'
     const headerstyle = "flex justify-between align-center py-4 sticky top-0 transition-colors px-3 md:px-9 z-10"
     const [activeNav, setActiveNav] = useState(false)
 
@@ -29,6 +32,8 @@ function App() {
         setActiveNav(false)
         const handleResize = () => {
             setScreenWidth(window.innerWidth);
+            window.scrollTo(0, 0);
+            setProjects(ProjectDataList.data);
         };
 
         // Add event listener for window resize
@@ -38,10 +43,16 @@ function App() {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, [screenWidth]); // Empty dependency array ensures the effect runs only once after initial render
+    }, [screenWidth]);
+    const handleNavToggle = () => {
+        setActiveNav(false);
+    };
+    const [showNewModal, setShowNewModal] = useState(false);
 
-    // Log screen width whenever the component renders
-    console.log('Screen width:', screenWidth);
+    const toggleDetailsModal = () => {
+        setShowNewModal(!showNewModal)
+        document.body.classList.toggle('modal-open');
+    }
 
     return (
         <>
@@ -66,62 +77,46 @@ function App() {
                                 <LR.Menu />
                             </Button>
                         </div>
-                        <div className='flex gap-4 hidden md:inline-flex items-center'>
-                            <p className={linkstyle}>
-                                <Link
-                                    to="home"
-                                    activeClass="active"
-                                    activeStyle={mystyle}
-                                    spy={true}
-                                    smooth={true}
-                                    offset={-110}
-                                    duration={500}
-                                >
-                                    Home
-                                </Link>
-                            </p>
-                            <p className={linkstyle}>
-                                <Link
-                                    to="about"
-                                    activeStyle={mystyle}
-                                    spy={true}
-                                    smooth={true}
-                                    offset={-66}
-                                    duration={500}
-                                >
-                                    About
-                                </Link>
-                            </p>
-                            <p className={linkstyle}>
-                                <Link
-                                    to="myWork"
-                                    activeStyle={mystyle}
-                                    spy={true}
-                                    smooth={true}
-                                    offset={-66}
-                                    duration={500}
-                                >
-                                    Projects
-                                </Link>
-                            </p>
-                            <p className={linkstyle}>
-                                <Link
-                                    to="contact"
-                                    activeStyle={mystyle}
-                                    spy={true}
-                                    smooth={true}
-                                    offset={-66}
-                                    duration={500}
-                                >
-                                    Contact
-                                </Link>
-                            </p>
-                            {/* <label className="switch-container">
-                                <input type="checkbox" onClick={() => {
-                                    setDarkmode(!darkmode)
-                                }} />
-                                <span className="slider"></span>
-                            </label> */}
+                        <div className='flex gap-4 hidden md:inline-flex items-center cursor-pointer'>
+                            <Link
+                                to="home"
+                                activeStyle={mystyle}
+                                spy={true}
+                                smooth={false}
+                                offset={-66}
+                            // duration={500}
+                            >
+                                Home
+                            </Link>
+                            <Link
+                                to="about"
+                                activeStyle={mystyle}
+                                spy={true}
+                                smooth={false}
+                                offset={-66}
+                            // duration={500}
+                            >
+                                About
+                            </Link>
+                            <Link
+                                to="project"
+                                activeStyle={mystyle}
+                                spy={true}
+                                smooth={false}
+                                offset={-66}
+                            // duration={500}
+                            >
+                                Projects
+                            </Link>
+                            {/* <Link
+                                to="contact"
+                                activeStyle={mystyle}
+                                spy={true}
+                                smooth={false}
+                                offset={-66}
+                            >
+                                Contact
+                            </Link> */}
                         </div>
                     </div>
                     <div className='snap-mandatory snap-x px-4 md:px-9 '>
@@ -131,18 +126,22 @@ function App() {
                         <section className="section mt-4" id="about">
                             <About />
                         </section>
-                        <section className="section mt-4" id="myWork">
-                            <MyWork />
+                        <section className="section mt-4" id="project">
+                            <Projects showDetails={toggleDetailsModal} />
                         </section>
-                        <section className="section mt-4" id="contact">
+                        {/* <section className="section mt-4" id="contact">
                             <Contact />
-                        </section>
+                        </section> */}
                     </div >
                     <div className={activeNav ? 'fixed top-16 navbar' : 'fixed top-16 navbar-inactive'}>
-                        <Modal activeNav={activeNav} />
+                        <Modal activeNav={activeNav} onClick={handleNavToggle} />
                     </div>
                 </div>
+                {showNewModal &&
+                    < DetailsModal showDetails={toggleDetailsModal} />
+                }
             </div>
+            <ScrollToTheTop />
         </>
     );
 }
